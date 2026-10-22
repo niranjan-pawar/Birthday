@@ -18,7 +18,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const video = document.getElementById("birthdayVideo");
     const letterSection = document.getElementById("letterSection");
-    const celebrateButton = document.getElementById("celebrateButton");
+
+    /*
+     * THIS IS THE "ONE MORE SURPRISE" BUTTON
+     */
+    const celebrateButton =
+        document.getElementById("celebrateButton");
 
     const countdownScreen =
         document.getElementById("countdownScreen");
@@ -48,6 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let musicPlaying = false;
     let openingStarted = false;
     let slideshowStarted = false;
+    let surpriseOpening = false;
 
     let currentSlide = 0;
     let photoTimer = null;
@@ -58,9 +64,16 @@ document.addEventListener("DOMContentLoaded", () => {
     ====================================================== */
 
     function wait(milliseconds) {
+
         return new Promise(resolve => {
-            setTimeout(resolve, milliseconds);
+
+            setTimeout(
+                resolve,
+                milliseconds
+            );
+
         });
+
     }
 
 
@@ -81,36 +94,50 @@ document.addEventListener("DOMContentLoaded", () => {
             return false;
         }
 
+
         console.log(
             "🎵 Trying to start music..."
         );
+
 
         console.log(
             "🎵 Music URL:",
             music.currentSrc || music.src
         );
 
+
         try {
 
             music.muted = false;
+
             music.volume = 0.45;
+
 
             /*
              * IMPORTANT:
              * Do NOT use music.load() here.
              */
 
-            const playPromise = music.play();
+            const playPromise =
+                music.play();
 
-            if (playPromise !== undefined) {
+
+            if (
+                playPromise !== undefined
+            ) {
+
                 await playPromise;
+
             }
 
+
             musicPlaying = true;
+
 
             console.log(
                 "✅ MUSIC IS PLAYING"
             );
+
 
             if (musicButton) {
 
@@ -120,6 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             }
 
+
             if (musicIcon) {
 
                 musicIcon.textContent =
@@ -127,25 +155,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
             }
 
+
             return true;
 
         } catch (error) {
 
             musicPlaying = false;
 
+
             console.error(
                 "❌ MUSIC FAILED TO PLAY"
             );
+
 
             console.error(
                 "Error name:",
                 error.name
             );
 
+
             console.error(
                 "Error message:",
                 error.message
             );
+
 
             if (musicButton) {
 
@@ -153,15 +186,20 @@ document.addEventListener("DOMContentLoaded", () => {
                     "playing"
                 );
 
+
                 musicButton.style.display =
                     "flex";
+
 
                 musicButton.style.opacity =
                     "1";
 
+
                 musicButton.style.pointerEvents =
                     "auto";
+
             }
+
 
             if (musicIcon) {
 
@@ -170,8 +208,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
             }
 
+
             return false;
+
         }
+
     }
 
 
@@ -187,13 +228,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 event.preventDefault();
 
+
                 if (openingStarted) {
+
                     return;
+
                 }
+
 
                 openingStarted = true;
 
+
                 openButton.disabled = true;
+
 
                 console.log(
                     "❤️ Open My Heart clicked"
@@ -235,6 +282,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         "hidden"
                     );
 
+
                     countdownScreen.style.display =
                         "flex";
 
@@ -263,6 +311,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 }
 
+
                 if (birthdayMessage) {
 
                     birthdayMessage.classList.add(
@@ -270,6 +319,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     );
 
                 }
+
 
                 createHearts(30);
 
@@ -293,6 +343,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 }
 
+
                 await wait(900);
 
 
@@ -314,11 +365,14 @@ document.addEventListener("DOMContentLoaded", () => {
                         "hidden"
                     );
 
+
                     mainContent.style.display =
                         "block";
 
+
                     mainContent.style.visibility =
                         "visible";
+
 
                     mainContent.style.opacity =
                         "1";
@@ -334,8 +388,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     "no-scroll"
                 );
 
+
                 document.documentElement.style.overflowY =
                     "auto";
+
 
                 document.body.style.overflowY =
                     "auto";
@@ -353,6 +409,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ================================================== */
 
                 await wait(1500);
+
 
                 startPhotoExperience();
 
@@ -375,26 +432,35 @@ document.addEventListener("DOMContentLoaded", () => {
     async function showCountdownNumber(number) {
 
         if (!countdownNumber) {
+
             return;
+
         }
+
 
         countdownNumber.style.display =
             "block";
 
+
         countdownNumber.textContent =
             number;
+
 
         countdownNumber.classList.remove(
             "countdown-pop"
         );
 
+
         void countdownNumber.offsetWidth;
+
 
         countdownNumber.classList.add(
             "countdown-pop"
         );
 
+
         await wait(1000);
+
     }
 
 
@@ -410,6 +476,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 event.preventDefault();
 
+
                 console.log(
                     "🎵 Music button clicked"
                 );
@@ -419,6 +486,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     const started =
                         await startMusic();
+
 
                     if (started) {
 
@@ -432,11 +500,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     music.pause();
 
+
                     musicPlaying = false;
+
 
                     musicButton.classList.remove(
                         "playing"
                     );
+
 
                     if (musicIcon) {
 
@@ -444,6 +515,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             "♪";
 
                     }
+
 
                     console.log(
                         "⏸️ Music paused"
@@ -469,6 +541,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 musicPlaying = true;
 
+
                 if (musicButton) {
 
                     musicButton.classList.add(
@@ -476,6 +549,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     );
 
                 }
+
 
                 if (musicIcon) {
 
@@ -494,6 +568,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 musicPlaying = true;
 
+
                 console.log(
                     "🎵 Audio is actually playing."
                 );
@@ -508,6 +583,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 musicPlaying = false;
 
+
                 if (musicButton) {
 
                     musicButton.classList.remove(
@@ -515,6 +591,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     );
 
                 }
+
 
                 if (musicIcon) {
 
@@ -547,15 +624,18 @@ document.addEventListener("DOMContentLoaded", () => {
                     "❌ MUSIC FILE ERROR"
                 );
 
+
                 console.error(
                     "Expected file:",
                     "./music/romantic_birthday_instrumental.mp3.mp3"
                 );
 
+
                 console.error(
                     "Browser URL:",
                     music.currentSrc || music.src
                 );
+
 
                 if (music.error) {
 
@@ -593,6 +673,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         slideshowDots.innerHTML = "";
 
+
         slides.forEach(
             (slide, index) => {
 
@@ -601,8 +682,10 @@ document.addEventListener("DOMContentLoaded", () => {
                         "div"
                     );
 
+
                 dot.className =
                     "slideshow-dot";
+
 
                 if (index === 0) {
 
@@ -611,6 +694,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     );
 
                 }
+
 
                 slideshowDots.appendChild(
                     dot
@@ -629,16 +713,26 @@ document.addEventListener("DOMContentLoaded", () => {
     function showSlide(index) {
 
         if (!slides.length) {
+
             return;
+
         }
+
 
         if (index < 0) {
+
             index = 0;
+
         }
 
+
         if (index >= slides.length) {
-            index = slides.length - 1;
+
+            index =
+                slides.length - 1;
+
         }
+
 
         slides.forEach(
             slide => {
@@ -650,6 +744,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         );
 
+
         slides[index].classList.add(
             "active"
         );
@@ -660,6 +755,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ".slideshow-dot"
             );
 
+
         dots.forEach(
             dot => {
 
@@ -669,6 +765,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             }
         );
+
 
         if (dots[index]) {
 
@@ -696,8 +793,11 @@ document.addEventListener("DOMContentLoaded", () => {
     function startPhotoExperience() {
 
         if (slideshowStarted) {
+
             return;
+
         }
+
 
         slideshowStarted = true;
 
@@ -712,6 +812,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         currentSlide = 0;
+
 
         showSlide(
             currentSlide
@@ -734,6 +835,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             photoTimer
                         );
 
+
                         photoTimer = null;
 
 
@@ -745,6 +847,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             }
                         );
 
+
                         return;
 
                     }
@@ -753,6 +856,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     showSlide(
                         currentSlide
                     );
+
 
                     createHearts(2);
 
@@ -770,14 +874,21 @@ document.addEventListener("DOMContentLoaded", () => {
     async function scrollToPhotos() {
 
         if (!photosSection) {
+
             return;
+
         }
+
 
         await wait(500);
 
+
         photosSection.scrollIntoView({
+
             behavior: "smooth",
+
             block: "start"
+
         });
 
     }
@@ -796,11 +907,14 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
             return;
+
         }
+
 
         console.log(
             "🎬 All photos finished."
         );
+
 
         console.log(
             "🎬 Starting birthday video."
@@ -816,8 +930,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if (videoSection) {
 
             videoSection.scrollIntoView({
+
                 behavior: "smooth",
+
                 block: "start"
+
             });
 
         }
@@ -847,7 +964,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
             video.muted = false;
 
+
             await video.play();
+
 
             console.log(
                 "🎬 Video playing with sound."
@@ -869,11 +988,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 video.muted = true;
 
+
                 await video.play();
+
 
                 console.log(
                     "🎬 Video playing muted."
                 );
+
 
                 showVideoSoundMessage();
 
@@ -902,8 +1024,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 "videoSoundMessage"
             );
 
+
         if (oldMessage) {
+
             oldMessage.remove();
+
         }
 
 
@@ -912,8 +1037,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 "div"
             );
 
+
         message.id =
             "videoSoundMessage";
+
 
         message.textContent =
             "🔊 Tap the video to turn sound on";
@@ -922,38 +1049,50 @@ document.addEventListener("DOMContentLoaded", () => {
         message.style.position =
             "fixed";
 
+
         message.style.left =
             "50%";
+
 
         message.style.bottom =
             "90px";
 
+
         message.style.transform =
             "translateX(-50%)";
+
 
         message.style.zIndex =
             "10000";
 
+
         message.style.padding =
             "12px 20px";
+
 
         message.style.borderRadius =
             "30px";
 
+
         message.style.background =
             "rgba(30,5,15,.95)";
+
 
         message.style.color =
             "#f3c6d2";
 
+
         message.style.border =
             "1px solid rgba(217,181,109,.5)";
+
 
         message.style.fontSize =
             "13px";
 
+
         message.style.textAlign =
             "center";
+
 
         message.style.pointerEvents =
             "none";
@@ -1044,8 +1183,13 @@ document.addEventListener("DOMContentLoaded", () => {
                         () => {
 
                             letterSection.scrollIntoView({
-                                behavior: "smooth",
-                                block: "start"
+
+                                behavior:
+                                    "smooth",
+
+                                block:
+                                    "start"
+
                             });
 
                         },
@@ -1148,8 +1292,10 @@ document.addEventListener("DOMContentLoaded", () => {
                             "div"
                         );
 
+
                     heart.className =
                         "heart-particle";
+
 
                     heart.innerHTML =
                         Math.random() > 0.5
@@ -1167,6 +1313,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         12 +
                         Math.random() *
                         25;
+
 
                     heart.style.fontSize =
                         size +
@@ -1215,24 +1362,77 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       FINAL CELEBRATION
+       FINAL "ONE MORE SURPRISE"
+       
+       THIS IS THE IMPORTANT PART.
+
+       Clicking the button:
+       
+       1. Creates hearts
+       2. Creates confetti
+       3. Shows celebration
+       4. Opens puzzle.html
     ====================================================== */
 
     if (celebrateButton) {
 
         celebrateButton.addEventListener(
             "click",
-            async () => {
+            async (event) => {
 
-                createHearts(60);
+                event.preventDefault();
 
-                createConfetti(120);
 
+                /*
+                 * Prevent double clicks.
+                 */
+
+                if (surpriseOpening) {
+
+                    return;
+
+                }
+
+
+                surpriseOpening = true;
+
+
+                celebrateButton.disabled =
+                    true;
+
+
+                celebrateButton.style.pointerEvents =
+                    "none";
+
+
+                console.log(
+                    "✨ ONE MORE SURPRISE CLICKED"
+                );
+
+
+                /* -----------------------------------------
+                   HEARTS
+                ------------------------------------------ */
+
+                createHearts(70);
+
+
+                /* -----------------------------------------
+                   CONFETTI
+                ------------------------------------------ */
+
+                createConfetti(140);
+
+
+                /* -----------------------------------------
+                   MUSIC
+                ------------------------------------------ */
 
                 if (music) {
 
                     music.volume =
                         0.60;
+
 
                     if (music.paused) {
 
@@ -1243,23 +1443,43 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
 
+                /* -----------------------------------------
+                   CELEBRATION MODE
+                ------------------------------------------ */
+
                 document.body.classList.add(
                     "celebration-mode"
                 );
 
 
-                setTimeout(
-                    () => {
+                /*
+                 * Wait so she can actually see
+                 * the final explosion before
+                 * moving to the game.
+                 */
 
-                        document.body.classList.remove(
-                            "celebration-mode"
-                        );
+                await wait(1800);
 
-                    },
-                    4000
+
+                /* -----------------------------------------
+                   OPEN THREE-ROUND PUZZLE
+                ------------------------------------------ */
+
+                console.log(
+                    "🧩 Opening puzzle game..."
                 );
 
+
+                window.location.href =
+                    "puzzle.html";
+
             }
+        );
+
+    } else {
+
+        console.warn(
+            "⚠️ celebrateButton not found."
         );
 
     }
@@ -1274,11 +1494,17 @@ document.addEventListener("DOMContentLoaded", () => {
     ) {
 
         const colors = [
+
             "#d9b56d",
+
             "#e9a8b8",
+
             "#ffffff",
+
             "#b85c72",
+
             "#f3c6d2"
+
         ];
 
 
@@ -1295,6 +1521,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         document.createElement(
                             "div"
                         );
+
 
                     piece.className =
                         "confetti";
@@ -1337,7 +1564,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                     piece.style.transform =
-                        `rotate(${Math.random() * 360}deg)`;
+                        `rotate(${
+                            Math.random() *
+                            360
+                        }deg)`;
 
 
                     document.body.appendChild(
@@ -1393,6 +1623,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 }
 
+
                 lastHeartTime =
                     now;
 
@@ -1410,6 +1641,18 @@ document.addEventListener("DOMContentLoaded", () => {
         "visibilitychange",
         () => {
 
+            /*
+             * Don't interfere while the user
+             * is transitioning to puzzle.html.
+             */
+
+            if (surpriseOpening) {
+
+                return;
+
+            }
+
+
             if (
                 document.hidden &&
                 music &&
@@ -1417,6 +1660,7 @@ document.addEventListener("DOMContentLoaded", () => {
             ) {
 
                 music.pause();
+
 
                 musicPlaying =
                     false;
@@ -1459,10 +1703,12 @@ document.addEventListener("DOMContentLoaded", () => {
             "🎵 Music element found."
         );
 
+
         console.log(
             "🎵 Expected music file:",
             "./music/romantic_birthday_instrumental.mp3.mp3"
         );
+
 
         console.log(
             "🎵 Browser music URL:",
