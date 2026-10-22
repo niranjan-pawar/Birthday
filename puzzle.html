@@ -1,0 +1,402 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#090306">
+
+    <title>One More Surprise ❤️</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600&family=Great+Vibes&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="puzzle.css">
+</head>
+
+<body>
+
+<!-- BACKGROUND -->
+<div class="background">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+</div>
+
+<!-- FLOATING HEARTS -->
+<div id="floatingHearts"></div>
+
+<!-- GAME HEADER -->
+<header class="game-header">
+
+    <p class="eyebrow">ONE LAST LITTLE ADVENTURE</p>
+
+    <h1>
+        A Surprise
+        <span>for Mrunal</span>
+    </h1>
+
+    <div class="gold-line"></div>
+
+    <p class="header-text">
+        Three little challenges.
+        <br>
+        One beautiful surprise at the end. ❤️
+    </p>
+
+</header>
+
+<!-- PROGRESS -->
+<div class="progress-wrapper">
+
+    <div class="progress-step active" id="step1">
+        <span>01</span>
+        <small>Dates</small>
+    </div>
+
+    <div class="progress-line"></div>
+
+    <div class="progress-step" id="step2">
+        <span>02</span>
+        <small>Memory</small>
+    </div>
+
+    <div class="progress-line"></div>
+
+    <div class="progress-step" id="step3">
+        <span>03</span>
+        <small>Quiz</small>
+    </div>
+
+</div>
+
+<!-- GAME CONTAINER -->
+<main class="game-container">
+
+    <!-- ROUND 1 -->
+    <section id="round1" class="game-round active-round">
+
+        <div class="round-number">ROUND ONE</div>
+
+        <h2>Our Special Dates</h2>
+
+        <p class="instruction">
+            Some dates are special for a reason.
+            <br>
+            Put them in the correct order. ❤️
+        </p>
+
+        <div class="date-hint">
+            Hint: Start with the earliest memory.
+        </div>
+
+        <div id="datePuzzle" class="date-puzzle"></div>
+
+        <button id="checkDates" class="game-button">
+            Check My Answer
+            <span>♥</span>
+        </button>
+
+        <p id="dateMessage" class="game-message"></p>
+
+    </section>
+
+    <!-- ROUND 2 -->
+    <section id="round2" class="game-round">
+
+        <div class="round-number">ROUND TWO</div>
+
+        <h2>
+            Piece Together
+            <span>Our Memory</span>
+        </h2>
+
+        <p class="instruction">
+            Every little piece belongs together.
+            <br>
+            Put the photo back together. 🧩
+        </p>
+
+        <div class="puzzle-frame">
+            <div id="imagePuzzle" class="image-puzzle"></div>
+        </div>
+
+        <button id="checkImage" class="game-button">
+            Reveal Our Memory
+            <span>♡</span>
+        </button>
+
+        <p id="imageMessage" class="game-message"></p>
+
+        <!-- PHOTO REVEAL -->
+        <div id="photoReveal" class="photo-reveal hidden">
+
+            <div class="reveal-glow"></div>
+
+            <img id="revealedImage"
+                 src="images/photo1.png"
+                 alt="Our memory">
+
+            <p>
+                Some memories are worth
+                putting back together. ❤️
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- ROUND 3 -->
+    <section id="round3" class="game-round">
+
+        <div class="round-number">ROUND THREE</div>
+
+        <h2>
+            How Well Do You
+            <span>Know Us?</span>
+        </h2>
+
+        <p class="instruction">
+            One final little test...
+            <br>
+            Let's see if you remember our story. ❤️
+        </p>
+
+        <div id="quizBox" class="quiz-box">
+
+            <div class="quiz-question-number">
+                QUESTION <span id="questionNumber">1</span> / 5
+            </div>
+
+            <h3 id="question">Question goes here</h3>
+
+            <div id="answers" class="answers"></div>
+
+            <p id="quizMessage" class="game-message"></p>
+
+        </div>
+
+    </section>
+
+    <!-- FINAL SURPRISE -->
+    <section id="finalRound" class="final-round">
+
+        <div id="finalHearts"></div>
+
+        <div class="final-heart">♥</div>
+
+        <p class="eyebrow">YOU MADE IT</p>
+
+        <h2>
+            One last thing,
+            <span>Mrunal...</span>
+        </h2>
+
+        <div class="gold-line"></div>
+
+        <p class="final-message">
+            You solved every little puzzle.
+            <br><br>
+            But there was never really a right answer.
+            <br>
+            Because the best part of this story
+            <br>
+            has always been <strong>you.</strong>
+        </p>
+
+        <!-- AUDIO SURPRISE -->
+        <div class="audio-card">
+
+            <div class="audio-icon">🎙️</div>
+
+            <p id="audioDescription">
+                A little something
+                <br>
+                from my heart...
+            </p>
+
+            <button id="playAudio" class="audio-button" type="button">
+                Play My Voice ❤️
+            </button>
+
+            <!-- YOUR BIRTHDAY VOICE MESSAGE -->
+            <audio id="recordedAudio" preload="auto">
+                <source src="audio/mrunal-message.mp3" type="audio/mpeg">
+            </audio>
+
+            <!-- SECOND ROMANTIC SONG -->
+            <audio id="romanticSong" preload="auto">
+                <source src="audio/romantic-song.mp3" type="audio/mpeg">
+            </audio>
+
+            <p id="songMessage" class="game-message" aria-live="polite"></p>
+
+        </div>
+
+        <p class="final-signature">
+            Forever yours,
+            <br>
+            <span>Niranjan</span>
+        </p>
+
+    </section>
+
+</main>
+
+<!-- CELEBRATION OVERLAY -->
+<div id="celebration" class="celebration">
+
+    <div class="blast" id="blast">
+        <div class="blast-core">♥</div>
+    </div>
+
+    <div class="celebration-text">
+
+        <div class="celebration-icon">🌹</div>
+
+        <h2>You did it!</h2>
+
+        <p>Another little memory unlocked ❤️</p>
+
+    </div>
+
+</div>
+
+<!-- YOUR EXISTING PUZZLE LOGIC -->
+<script src="puzzle.js"></script>
+
+<!-- BIRTHDAY AUDIO SEQUENCE -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const playButton = document.getElementById("playAudio");
+    const voiceMessage = document.getElementById("recordedAudio");
+    const romanticSong = document.getElementById("romanticSong");
+
+    const songMessage = document.getElementById("songMessage");
+    const audioDescription = document.getElementById("audioDescription");
+
+    if (!playButton || !voiceMessage || !romanticSong) {
+        console.error("Birthday audio elements were not found.");
+        return;
+    }
+
+    let audioSequenceStarted = false;
+
+    // Play the voice message when the button is clicked.
+    playButton.addEventListener("click", async () => {
+
+        if (audioSequenceStarted) return;
+
+        audioSequenceStarted = true;
+        playButton.disabled = true;
+
+        voiceMessage.currentTime = 0;
+        romanticSong.pause();
+        romanticSong.currentTime = 0;
+
+        playButton.textContent = "Playing My Message ❤️";
+
+        if (songMessage) {
+            songMessage.textContent = "";
+        }
+
+        try {
+            await voiceMessage.play();
+
+            if (audioDescription) {
+                audioDescription.textContent =
+                    "Listen to this little message from my heart... ❤️";
+            }
+
+        } catch (error) {
+
+            console.error("Voice message could not play:", error);
+
+            audioSequenceStarted = false;
+            playButton.disabled = false;
+            playButton.textContent = "Tap to Play My Voice ❤️";
+
+            if (songMessage) {
+                songMessage.textContent =
+                    "The audio couldn't start. Please tap the button again.";
+            }
+        }
+
+    });
+
+    // When the voice message ends, play the second song.
+    voiceMessage.addEventListener("ended", async () => {
+
+        playButton.textContent = "Now Playing Our Song 🎵";
+
+        if (audioDescription) {
+            audioDescription.textContent =
+                "And now, a song just for you, my love... 💕";
+        }
+
+        if (songMessage) {
+            songMessage.textContent =
+                "For you, Mrunal, with all my love. ❤️🎶";
+        }
+
+        romanticSong.currentTime = 0;
+
+        try {
+            await romanticSong.play();
+
+        } catch (error) {
+
+            console.error("Romantic song could not play:", error);
+
+            if (songMessage) {
+                songMessage.textContent =
+                    "Your song is ready. Tap the button below to play it.";
+            }
+
+            playButton.disabled = false;
+            playButton.textContent = "Play Our Song ❤️";
+
+            // Allow the same button to start the song manually.
+            playButton.onclick = async () => {
+                try {
+                    await romanticSong.play();
+                    playButton.disabled = true;
+                } catch (err) {
+                    console.error("Song playback failed:", err);
+                }
+            };
+        }
+
+    });
+
+    // Show a final message after the song finishes.
+    romanticSong.addEventListener("ended", () => {
+
+        if (audioDescription) {
+            audioDescription.textContent =
+                "One little message, one special song, and all my love. ❤️";
+        }
+
+        if (songMessage) {
+            songMessage.textContent =
+                "Happy Birthday, my love, Mrunal. You mean the world to me. Forever yours, Niranjan. ❤️♾️";
+        }
+
+        playButton.textContent = "Replay My Voice ❤️";
+        playButton.disabled = false;
+
+        // Allow replaying the full audio sequence.
+        audioSequenceStarted = false;
+
+    });
+
+});
+</script>
+
+</body>
+</html>
